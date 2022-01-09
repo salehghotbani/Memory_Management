@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class MainClass extends JFrame {
     private final String helpText = "";
-    private boolean canOpenFile = true;
     private final SegmentationClass segmentationClass = new SegmentationClass();
     private final PagingClass pagingClass = new PagingClass();
     private final FileManagementClass fileManagementClass = new FileManagementClass();
@@ -30,7 +29,7 @@ public class MainClass extends JFrame {
                 switch (comboBox.getItemAt(comboBox.getSelectedIndex())) {
                     case "Paging":
                         sizeOfMemory = Integer.parseInt(JTFSizeOfMemory.getText());
-
+                        pagingClass.generator(sizeOfMemory, mainClass);
                         //editorPane.setText(fifoClass.findAvgTime(listOfItems, JTFSizeOfMemory.getText()));
                         break;
                     case "Segmentation":

@@ -69,7 +69,7 @@ public class SegmentationClass {
         } else {
             mainClass.jButtons[count].setActionCommand(str);
             mainClass.jButtons[count].setBackground(Color.green);
-            mainClass.jButtons[count].setText("Segment: " + count);
+            mainClass.jButtons[count].setText("Segment: " + count / 2);
         }
         mainClass.jButtons[count].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -78,7 +78,6 @@ public class SegmentationClass {
             }
         });
         mainClass.panel.add(mainClass.jButtons[count]);
-        count++;
         SwingUtilities.updateComponentTreeUI(mainClass);
         mainClass.updateJFrame();
     }
