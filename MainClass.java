@@ -6,7 +6,6 @@ public class MainClass extends JFrame {
     private final String helpText = "";
     private final SegmentationClass segmentationClass = new SegmentationClass();
     private final PagingClass pagingClass = new PagingClass();
-    private final FileManagementClass fileManagementClass = new FileManagementClass();
     private ArrayList<ProgramInfoClass> listOfItems = new ArrayList<>();
     private int sizeOfMemory = 0;
     JPanel panel;
@@ -24,24 +23,18 @@ public class MainClass extends JFrame {
         JComboBox<String> comboBox = new JComboBox<>(schedulingMethods);
 
         buttonRun.addActionListener(e -> {
-            if (fileManagementClass.ifFileExist(this, listOfItems, sizeOfMemory) && fileManagementClass.isInt(JTFSizeOfMemory.getText())) {
-                fileManagementClass.readWriteArray(listOfItems, this, sizeOfMemory);
-                switch (comboBox.getItemAt(comboBox.getSelectedIndex())) {
-                    case "Paging":
-                        sizeOfMemory = Integer.parseInt(JTFSizeOfMemory.getText());
-                        pagingClass.generator(sizeOfMemory, mainClass);
-                        //editorPane.setText(fifoClass.findAvgTime(listOfItems, JTFSizeOfMemory.getText()));
-                        break;
-                    case "Segmentation":
-                        sizeOfMemory = Integer.parseInt(JTFSizeOfMemory.getText());
-                        segmentationClass.generator(sizeOfMemory, mainClass);
-                        //editorPane.setText(fifoClass.findAvgTime(listOfItems, JTFSizeOfMemory.getText()));
-                        break;
-                    default:
-                        JOptionPane.showMessageDialog(this, "Choose one of Paging or Segmentation"
-                                , "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                updateJFrame();
+            switch (comboBox.getItemAt(comboBox.getSelectedIndex())) {
+                case "Paging":
+                    sizeOfMemory = Integer.parseInt(JTFSizeOfMemory.getText());
+                    pagingClass.generator(sizeOfMemory, mainClass);
+                    break;
+                case "Segmentation":
+                    sizeOfMemory = Integer.parseInt(JTFSizeOfMemory.getText());
+                    segmentationClass.generator(sizeOfMemory, mainClass);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "Choose one of Paging or Segmentation"
+                            , "Error", JOptionPane.ERROR_MESSAGE);
             }
             updateJFrame();
         });
