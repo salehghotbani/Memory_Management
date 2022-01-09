@@ -1,12 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class MainClass extends JFrame {
     private final String helpText = "";
     private final SegmentationClass segmentationClass = new SegmentationClass();
     private final PagingClass pagingClass = new PagingClass();
-    private ArrayList<ProgramInfoClass> listOfItems = new ArrayList<>();
     private int sizeOfMemory = 0;
     JPanel panel;
     JButton[] jButtons;

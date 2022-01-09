@@ -29,7 +29,7 @@ public class SegmentationClass {
         }
 
         hole = sizeOfMemory - sumLimit;
-        sizeOfHole = hole / (counterOfRequests - 1);
+        sizeOfHole = hole / counterOfRequests;
         listRequests.get(0).setPBase(0);
 
         for (int i = 1; i < counterOfRequests; i++) {
@@ -57,17 +57,16 @@ public class SegmentationClass {
     }
 
     public void createButtons(MainClass mainClass, int count) {
-        String str = "Process ID:";
-
         mainClass.jButtons[count] = new JButton();
         mainClass.jButtons[count].setSize(20, 80);
         mainClass.jButtons[count].setCursor(new Cursor(Cursor.HAND_CURSOR));
         if (count % 2 != 0) {
-            mainClass.jButtons[count].setActionCommand(str);
+            mainClass.jButtons[count].setActionCommand("Size of hole: " + sizeOfHole);
             mainClass.jButtons[count].setBackground(Color.RED);
             mainClass.jButtons[count].setText("Hole");
         } else {
-            mainClass.jButtons[count].setActionCommand(str);
+            mainClass.jButtons[count].setActionCommand("Segment " + listRequests.get(count / 2).getPId() + "\nBase: " + listRequests.get(count / 2).getPBase() +
+                    "\nLimit: " + listRequests.get(count / 2).getPLimit());
             mainClass.jButtons[count].setBackground(Color.green);
             mainClass.jButtons[count].setText("Segment: " + count / 2);
         }
