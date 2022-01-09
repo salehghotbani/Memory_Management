@@ -40,7 +40,6 @@ public class SegmentationClass {
     }
 
     private void showChart(MainClass mainClass) {
-        int count = 0;
         mainClass.panel = new JPanel(new GridLayout(counterOfRequests * 2, 1));
         mainClass.jButtons = new JButton[counterOfRequests * 2];
         removeAllElementsOfJFrame(mainClass);
@@ -52,7 +51,7 @@ public class SegmentationClass {
         mainClass.getContentPane().add(jScrollPane);
         mainClass.setLocationRelativeTo(mainClass.getOwner());
         for (int i = 0; i < counterOfRequests * 2; i++) {
-            createButtons(mainClass, count);
+            createButtons(mainClass, i);
         }
         mainClass.pack();
     }
@@ -61,11 +60,17 @@ public class SegmentationClass {
         String str = "Process ID:";
 
         mainClass.jButtons[count] = new JButton();
-        mainClass.jButtons[count].setSize(80, 80);
-        mainClass.jButtons[count].setBackground(Color.green);
+        mainClass.jButtons[count].setSize(20, 80);
         mainClass.jButtons[count].setCursor(new Cursor(Cursor.HAND_CURSOR));
-        mainClass.jButtons[count].setActionCommand(str);
-        mainClass.jButtons[count].setText("");
+        if (count % 2 != 0) {
+            mainClass.jButtons[count].setActionCommand(str);
+            mainClass.jButtons[count].setBackground(Color.RED);
+            mainClass.jButtons[count].setText("Hole");
+        } else {
+            mainClass.jButtons[count].setActionCommand(str);
+            mainClass.jButtons[count].setBackground(Color.green);
+            mainClass.jButtons[count].setText("Segment: " + count);
+        }
         mainClass.jButtons[count].addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String choice = e.getActionCommand();

@@ -74,19 +74,6 @@ public class MainClass extends JFrame {
         pack();
     }
 
-    /*public String processInfo(int i, int sizeOfMemory) {
-        String str = "";
-        //ID
-        str += i + " ";
-        //ArrivalTime
-        str += (i / 4) + " ";
-        //Priority
-        str += random.nextInt(6) + 1 + " ";
-        //BurstTime
-        str += random.nextInt(5) + 1 + "\n";
-        return code(str);
-    }*/
-
     public void updateJFrame() {
         SwingUtilities.updateComponentTreeUI(this);
         invalidate();
