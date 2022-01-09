@@ -3,7 +3,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class MainClass extends JFrame {
-    private final JEditorPane editorPane = new JEditorPane();
     private final String helpText = "";
     private boolean canOpenFile = true;
     private final SegmentationClass segmentationClass = new SegmentationClass();
@@ -11,6 +10,8 @@ public class MainClass extends JFrame {
     private final FileManagementClass fileManagementClass = new FileManagementClass();
     private ArrayList<ProgramInfoClass> listOfItems = new ArrayList<>();
     private int sizeOfMemory = 0;
+    JPanel panel;
+    JButton[] jButtons;
 
     private void frame(MainClass mainClass) {
         JPanel panel = new JPanel();
@@ -56,16 +57,12 @@ public class MainClass extends JFrame {
         menuBar.add(buttonRun);
         menuBar.add(buttonHelp);
 
-        editorPane.setText(helpText);
         setTitle("Memory Allocation");
         setJMenuBar(menuBar);
-        panel.add(editorPane);
         panel.setBackground(Color.white);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JTFSizeOfMemory.setBounds(10, 10, 0, 0);
         setBounds(0, 0, 600, 400);
-        editorPane.setSize(getWidth() - 50, getHeight() - 50);
-        editorPane.setEditable(false);
         add(panel);
         setVisible(true);
         setIconImage(Toolkit.getDefaultToolkit().getImage("src/Files/LOGO.png"));
@@ -90,7 +87,7 @@ public class MainClass extends JFrame {
         return code(str);
     }*/
 
-    private void updateJFrame() {
+    public void updateJFrame() {
         SwingUtilities.updateComponentTreeUI(this);
         invalidate();
         validate();
