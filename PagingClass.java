@@ -1,3 +1,7 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -32,6 +36,78 @@ public class PagingClass {
             listRequests.get(i).setPBase(listRequests.get(i - 1).getPBase() + listRequests.get(i - 1).getPLimit() + sizeOfHole);
             System.out.println(listRequests.get(i - 1).getPBase() + listRequests.get(i - 1).getPLimit() + sizeOfHole + ":   " + i);
         }
-        //showChart(mainClass);
+     //  showChart(mainClass);
+    }
+    public void paging(int sizeOfMemory, MainClass mainClass){
+        int sizeofpage=sumLimit/counterOfRequests;
+        int frames=sizeOfMemory/sizeofpage;
+        int numberofholes=(sizeOfMemory-sumLimit)/sizeofpage;
+        int numberoffullpage=frames-numberofholes;
+        int numberoffullpage1=numberoffullpage;
+        ArrayList<Integer> listPages = new ArrayList<>();
+        for(int i=0;i<numberoffullpage;i++){
+            if(i%2==0&&numberoffullpage1>0){
+                listPages.add(1);
+                numberoffullpage1--;
+
+            }
+            else {
+                listPages.add(0);
+
+            }
+
+        }
+
+
+        showChart(mainClass);
+
+
+
+    }
+    private void showChart(MainClass mainClass) {
+        mainClass.panel = new JPanel(new GridLayout(counterOfRequests * 2, 1));
+        mainClass.jButtons = new JButton[counterOfRequests * 2];
+        removeAllElementsOfJFrame(mainClass);
+        mainClass.setPreferredSize(new Dimension(400, 400));
+        mainClass.add(mainClass.panel);
+        JScrollPane jScrollPane = new JScrollPane(mainClass.panel);
+        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        mainClass.getContentPane().add(jScrollPane);
+        mainClass.setLocationRelativeTo(mainClass.getOwner());
+        for (int i = 0; i < counterOfRequests * 2; i++) {
+            createButtons(mainClass, i);
+        }
+        mainClass.pack();
+    }
+
+    public void createButtons(MainClass mainClass, int count) {
+        mainClass.jButtons[count] = new JButton();
+        mainClass.jButtons[count].setSize(20, 80);
+        mainClass.jButtons[count].setCursor(new Cursor(Cursor.HAND_CURSOR));
+        if (count % 2 != 0) {
+            mainClass.jButtons[count].setActionCommand("Size of hole: " + sizeOfHole);
+            mainClass.jButtons[count].setBackground(Color.RED);
+            mainClass.jButtons[count].setText("Hole");
+        } else {
+            mainClass.jButtons[count].setActionCommand("Segment " + listRequests.get(count / 2).getPId() + "\nBase: " + listRequests.get(count / 2).getPBase() +
+                    "\nLimit: " + listRequests.get(count / 2).getPLimit());
+            mainClass.jButtons[count].setBackground(Color.green);
+            mainClass.jButtons[count].setText("Segment: " + count);
+        }
+        mainClass.jButtons[count].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String choice = e.getActionCommand();
+                JOptionPane.showMessageDialog(null, choice, "Process Info", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        mainClass.panel.add(mainClass.jButtons[count]);
+        count++;
+        SwingUtilities.updateComponentTreeUI(mainClass);
+        mainClass.updateJFrame();
+    }
+
+    public void removeAllElementsOfJFrame(MainClass mainClass) {
+        mainClass.panel.removeAll();
     }
 }
