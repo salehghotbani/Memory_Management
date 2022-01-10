@@ -3,8 +3,7 @@ import java.awt.*;
 
 public class MainClass extends JFrame {
     private final String helpText = "";
-    private final SegmentationClass segmentationClass = new SegmentationClass();
-    private final PagingClass pagingClass = new PagingClass();
+    private final MemoryManagerClass memoryManagerClass = new MemoryManagerClass();
     private int sizeOfMemory = 0;
     JPanel panel;
     JButton[] jButtons;
@@ -24,11 +23,11 @@ public class MainClass extends JFrame {
             switch (comboBox.getItemAt(comboBox.getSelectedIndex())) {
                 case "Paging":
                     sizeOfMemory = Integer.parseInt(JTFSizeOfMemory.getText());
-                    pagingClass.generator(sizeOfMemory, mainClass);
+                    memoryManagerClass.generator(sizeOfMemory, mainClass, false);
                     break;
                 case "Segmentation":
                     sizeOfMemory = Integer.parseInt(JTFSizeOfMemory.getText());
-                    segmentationClass.generator(sizeOfMemory, mainClass);
+                    memoryManagerClass.generator(sizeOfMemory, mainClass, true);
                     break;
                 default:
                     JOptionPane.showMessageDialog(this, "Choose one of Paging or Segmentation"
