@@ -10,6 +10,7 @@ public class MemoryManagerClass {
     ArrayList<ProgramInfoClass> listRequests = new ArrayList<>();
     ArrayList<Integer> listPages = new ArrayList<>();
     int counterOfRequests, limit = 0, sumLimit = 0, hole, sizeOfHole, sizeOfPage, numberFrames, numberofholes, numberoffullpage, numberoffullpage1, c = 0;
+    boolean isFirstTime = true;
 
     public void generator(int sizeOfMemory, MainClass mainClass, boolean isSegmentation) {
         if (sizeOfMemory > 1000) {
@@ -74,12 +75,17 @@ public class MemoryManagerClass {
             c = 0;
             listPages.clear();
         }
+
+        isFirstTime = true;
     }
 
     private void showChart(MainClass mainClass, boolean isSegmentation, int counter) {
+        if (!isFirstTime) {
+            removeAllElementsOfJFrame(mainClass);
+            isFirstTime = false;
+        }
         mainClass.panel = new JPanel(new GridLayout(counter, 1));
         mainClass.jButtons = new JButton[counter];
-        removeAllElementsOfJFrame(mainClass);
         mainClass.setPreferredSize(new Dimension(400, 400));
         mainClass.add(mainClass.panel);
         JScrollPane jScrollPane = new JScrollPane(mainClass.panel);

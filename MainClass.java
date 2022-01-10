@@ -64,10 +64,16 @@ public class MainClass extends JFrame {
     }
 
     public void updateJFrame() {
+        SwingUtilities.updateComponentTreeUI(this.panel);
+        panel.invalidate();
+        panel.validate();
+        panel.repaint();
+        panel.revalidate();
         SwingUtilities.updateComponentTreeUI(this);
         invalidate();
         validate();
         repaint();
+        revalidate();
         pack();
     }
 
