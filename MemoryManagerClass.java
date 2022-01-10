@@ -24,7 +24,6 @@ public class MemoryManagerClass {
                 limit += sizeOfMemory / (counterOfRequests * 3);
             }
             sumLimit += limit;
-            //limit -= random.nextInt(limit - 10) / 7 + 1;
             System.out.println(limit);
             listRequests.add(new ProgramInfoClass(i, 0, limit));
         }
@@ -50,7 +49,6 @@ public class MemoryManagerClass {
             // do paging
 
             sizeOfPage = sumLimit / counterOfRequests;
-            System.out.println(sizeOfPage + " scccccccccccccccccccc");
             numberFrames = sizeOfMemory / sizeOfPage;
             numberofholes = (sizeOfMemory - sumLimit) / sizeOfPage;
             numberoffullpage = numberFrames - numberofholes;
