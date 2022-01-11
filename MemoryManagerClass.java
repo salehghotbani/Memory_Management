@@ -128,7 +128,7 @@ public class MemoryManagerClass {
         }
         mainClass.jButtons[count].addActionListener(e -> {
             String choice = e.getActionCommand();
-            JOptionPane.showMessageDialog(null, choice, "Process Info", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, choice, "Info", JOptionPane.INFORMATION_MESSAGE);
         });
         mainClass.panel.add(mainClass.jButtons[count]);
         SwingUtilities.updateComponentTreeUI(mainClass);

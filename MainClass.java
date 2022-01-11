@@ -40,7 +40,8 @@ public class MainClass extends JFrame {
 
         buttonHelp.addActionListener(e -> {
             JOptionPane.showMessageDialog(null, "Choose one of elements are in combobox\n" +
-                    "then write size of memory and click Start!", "Help", JOptionPane.INFORMATION_MESSAGE);
+                    "then write size of memory and click Start!\nYou can click on any rectangle that shows after click " +
+                    "start to see some information about segment or page!", "Help", JOptionPane.INFORMATION_MESSAGE);
         });
 
         menuBar.add(comboBox);
