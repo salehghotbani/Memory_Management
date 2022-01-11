@@ -95,7 +95,7 @@ public class MemoryManagerClass {
         mainClass.jButtons[count].setCursor(new Cursor(Cursor.HAND_CURSOR));
         if (isSegmentation) {
             if (count == 0) {
-                mainClass.jButtons[count].setActionCommand("OS " +
+                mainClass.jButtons[count].setActionCommand("OS" +
                         "\nBase: " + listRequests.get(0).getPBase() +
                         "\nLimit: " + listRequests.get(0).getPLimit());
                 mainClass.jButtons[count].setBackground(Color.green);
