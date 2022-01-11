@@ -2,32 +2,34 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainClass extends JFrame {
-    private final String helpText = "";
     private final MemoryManagerClass memoryManagerClass = new MemoryManagerClass();
     private int sizeOfMemory = 0;
-    JPanel panel;
+    JPanel panel = new JPanel();
     JButton[] jButtons;
+    JButton buttonRun = new JButton("Start");
+    JButton buttonHelp = new JButton("Help");
+    JLabel JLSizeOfMemory = new JLabel(" Size of memory: ");
+    JTextField JTFSizeOfMemory = new JTextField();
+    JMenuBar menuBar = new JMenuBar();
+    JEditorPane editorPane = new JEditorPane();
 
     private void frame(MainClass mainClass) {
-        JPanel panel = new JPanel();
-        JButton buttonRun = new JButton("Start");
-        JButton buttonHelp = new JButton("Help");
-        JLabel JLSizeOfMemory = new JLabel(" Size of memory: ");
-        JTextField JTFSizeOfMemory = new JTextField();
-        JMenuBar menuBar = new JMenuBar();
-
         String[] schedulingMethods = {"Paging", "Segmentation"};
         JComboBox<String> comboBox = new JComboBox<>(schedulingMethods);
 
         buttonRun.addActionListener(e -> {
             switch (comboBox.getItemAt(comboBox.getSelectedIndex())) {
                 case "Paging":
-                    sizeOfMemory = Integer.parseInt(JTFSizeOfMemory.getText());
-                    memoryManagerClass.generator(sizeOfMemory, mainClass, false);
+                    if (checkNumber(JTFSizeOfMemory.getText())) {
+                        sizeOfMemory = Integer.parseInt(JTFSizeOfMemory.getText());
+                        memoryManagerClass.generator(sizeOfMemory, mainClass, false);
+                    }
                     break;
                 case "Segmentation":
-                    sizeOfMemory = Integer.parseInt(JTFSizeOfMemory.getText());
-                    memoryManagerClass.generator(sizeOfMemory, mainClass, true);
+                    if (checkNumber(JTFSizeOfMemory.getText())) {
+                        sizeOfMemory = Integer.parseInt(JTFSizeOfMemory.getText());
+                        memoryManagerClass.generator(sizeOfMemory, mainClass, true);
+                    }
                     break;
                 default:
                     JOptionPane.showMessageDialog(this, "Choose one of Paging or Segmentation"
@@ -37,7 +39,8 @@ public class MainClass extends JFrame {
         });
 
         buttonHelp.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, helpText, "Help", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Choose one of elements are in combobox\n" +
+                    "then write size of memory and click Start!", "Help", JOptionPane.INFORMATION_MESSAGE);
         });
 
         menuBar.add(comboBox);
@@ -46,21 +49,35 @@ public class MainClass extends JFrame {
         menuBar.add(buttonRun);
         menuBar.add(buttonHelp);
 
+        panel.add(editorPane);
+        editorPane.setSize(500, 500);
+        editorPane.setEditable(false);
         setTitle("Memory Allocation");
         setJMenuBar(menuBar);
         panel.setBackground(Color.white);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JTFSizeOfMemory.setBounds(10, 10, 0, 0);
-        setBounds(0, 0, 600, 400);
         add(panel);
         setVisible(true);
         setIconImage(Toolkit.getDefaultToolkit().getImage("src/Files/LOGO.png"));
-        JScrollPane jScrollPane = new JScrollPane(panel);
-        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        getContentPane().add(jScrollPane);
         setLocationRelativeTo(getOwner());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
+    }
+
+    private boolean checkNumber(String input) {
+        try {
+            if (Integer.parseInt(input) < 1) {
+                JOptionPane.showMessageDialog(this, "Please write number grater than 1"
+                        , "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error has occurred!\nCause maybe:\n" +
+                    "1. You don't wrote anything!\n" +
+                    "2. You wrote digit with anything else!\n" +
+                    "Error message: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
     }
 
     public void updateJFrame() {
