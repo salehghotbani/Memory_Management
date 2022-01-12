@@ -66,8 +66,8 @@ public class MainClass extends JFrame {
 
     private boolean checkNumber(String input) {
         try {
-            if (Integer.parseInt(input) < 1) {
-                JOptionPane.showMessageDialog(this, "Please write number grater than 1"
+            if (Integer.parseInt(input) < 30) {
+                JOptionPane.showMessageDialog(this, "Please write number grater than 30"
                         , "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
@@ -76,6 +76,7 @@ public class MainClass extends JFrame {
             JOptionPane.showMessageDialog(this, "Error has occurred!\nCause maybe:\n" +
                     "1. You don't wrote anything!\n" +
                     "2. You wrote digit with anything else!\n" +
+                    "3. You wrote number less than 30\n"+
                     "Error message: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
